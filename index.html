@@ -1,0 +1,133 @@
+<!DOCT html>
+
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="manifest" href="./manifest.json">	
+
+
+</head>
+
+<style type="text/css">
+	body {
+    background-color: lightblue;
+}
+
+
+
+</style>
+
+
+<body onload="mostra();"> 
+	 
+
+
+
+
+	<div class="tudo">
+			<header id="cabeca">
+
+			</header>
+			
+<div class="container-fluid" id="a1">
+     <div class="row">
+    <br>  
+      <div class="container">
+        <div class="jumbotron" align="center">
+          <h2>ToDo</h2><br>
+        <div class="container">    
+        <div class="row">
+     
+
+          <div>
+   
+          		Tarefa: <input type="text" name="quant" id="tarefa" />
+
+
+<input type="button" class="btn btn-primary" id="btAtual" value="Adicionar" onclick="add()">
+
+
+
+<div id="texto"></div>
+
+
+
+          </div>
+        </div>
+    </div>
+
+    </div>
+    </div>  
+
+
+
+
+
+				
+
+
+
+
+<script>
+		if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js')
+ .then(function () {console.log('service worker registered');})
+ .catch(function () {console.warn('service worker failed'); });
+ }
+
+	tarefas = [];
+	
+
+    function mostrar(){
+
+    };
+
+
+	function mostra()	{
+			if (typeof(Storage) !== "undefined") 	if (JSON.parse(localStorage.getItem("tarefas")) != null)	tarefas = JSON.parse(localStorage.getItem("tarefas"));	
+			document.getElementById("texto").innerHTML = '<br>Tarefas: <br>'
+			for (var i = 0; i < tarefas.length; i++) {
+				document.getElementById("texto").innerHTML +=   tarefas[i] + '   ' +	' <input type="button" class="btn btn-danger"id="excluir" value="X" onclick="exclui('+ i +')"><br>';
+			}
+			
+			
+	};
+	
+	
+	mostra();
+
+
+	function add() {
+		
+		if (typeof(Storage) !== "undefined") {
+		
+			if (JSON.parse(localStorage.getItem("tarefas")) != null)	tarefas = JSON.parse(localStorage.getItem("tarefas"));				
+
+			tarefas.push(document.getElementById("tarefa").value)
+
+			localStorage.setItem("tarefas", JSON.stringify(tarefas));
+
+
+			mostra();
+		}
+	};
+
+	function exclui(i)	{
+		tarefas.splice(i, 1);
+		localStorage.setItem("tarefas", JSON.stringify(tarefas));		
+		mostra();
+	};
+mostra();
+
+</script>
+
+</div>
+<footer id="pe" onload="mostra();"></footer>
+</div>
+</body>
+
+</html>
